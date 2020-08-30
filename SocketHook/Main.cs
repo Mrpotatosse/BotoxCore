@@ -51,7 +51,7 @@ namespace SocketHook
             var ipAddress = new IPAddress(structure.sin_addr.S_addr);
             var port = structure.sin_port;
 
-            _interface.Message($"Connection attempt at {ipAddress}:{port}, redirecting to 127.0.0.1:{_redirectionPort}...");
+            _interface.Message($"Connection attempt at {ipAddress}:{htons(port)}, redirecting to 127.0.0.1:{_redirectionPort}...");
             _interface.IpRedirected(new IPEndPoint(ipAddress, htons(port)), Process.GetCurrentProcess().Id, _redirectionPort);
 
             var strucPtr = Marshal.AllocHGlobal(addrSize);

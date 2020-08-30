@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotoxCore", "BotoxCore\Boto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketHook", "SocketHook\SocketHook.csproj", "{EB3FCA74-D359-4356-AFA9-EA23709AE810}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotoxNetwork", "BotoxNetwork\BotoxNetwork.csproj", "{FDD35AF2-32B5-4682-8425-C779F4A42E43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotoxDofusProtocol", "BotoxDofusProtocol\BotoxDofusProtocol.csproj", "{241CCF46-3035-4897-B5A0-16D9C0B584E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotoxSharedProtocol", "BotoxSharedProtocol\BotoxSharedProtocol.csproj", "{E61D6580-6DB0-45B5-9382-46F2DBA6002E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{EB3FCA74-D359-4356-AFA9-EA23709AE810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB3FCA74-D359-4356-AFA9-EA23709AE810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB3FCA74-D359-4356-AFA9-EA23709AE810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD35AF2-32B5-4682-8425-C779F4A42E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD35AF2-32B5-4682-8425-C779F4A42E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD35AF2-32B5-4682-8425-C779F4A42E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD35AF2-32B5-4682-8425-C779F4A42E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{241CCF46-3035-4897-B5A0-16D9C0B584E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241CCF46-3035-4897-B5A0-16D9C0B584E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241CCF46-3035-4897-B5A0-16D9C0B584E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241CCF46-3035-4897-B5A0-16D9C0B584E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E61D6580-6DB0-45B5-9382-46F2DBA6002E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E61D6580-6DB0-45B5-9382-46F2DBA6002E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E61D6580-6DB0-45B5-9382-46F2DBA6002E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E61D6580-6DB0-45B5-9382-46F2DBA6002E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

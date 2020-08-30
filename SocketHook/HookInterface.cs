@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,11 +10,13 @@ namespace SocketHook
 {
     public class HookInterface : MarshalByRefObject
     {
-        public virtual void NotifyInstalled(string processName) => Console.WriteLine($"Injected on process : {processName}");
-        public virtual void Message(string message) => Console.WriteLine($"{message}");
-        public virtual void Error(Exception exception) => Console.WriteLine($"{exception}");
-        public virtual void IpRedirected(IPEndPoint ip, int processId, int redirectionPort) => Console.WriteLine($"Ip redirected from '{ip}' to '127.0.0.1:{redirectionPort}' (processId:'{processId}')");
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public virtual void Ping() => Console.WriteLine("Socket Hook loaded");
+        public virtual void NotifyInstalled(string processName) => logger.Info($"Injected on process : {processName}");
+        public virtual void Message(string message) => logger.Info($"{message}");
+        public virtual void Error(Exception exception) => logger.Error(exception);
+        public virtual void IpRedirected(IPEndPoint ip, int processId, int redirectionPort) => logger.Info($"Ip redirected from '{ip}' to '127.0.0.1:{redirectionPort}' (processId:'{processId}')");
+
+        public virtual void Ping() => logger.Info("Socket Hook loaded");
     }
 }

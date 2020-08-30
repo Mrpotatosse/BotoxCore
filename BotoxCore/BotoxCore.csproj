@@ -37,7 +37,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\ConfigurationManager.cs" />
+    <Compile Include="Configurations\Customs\StartupConfiguration.cs" />
+    <Compile Include="Configurations\IConfiguration.cs" />
+    <Compile Include="Extensions\Singleton.cs" />
+    <Compile Include="Hooks\BotoxHookInterface.cs" />
+    <Compile Include="Hooks\Hooker.cs" />
+    <Compile Include="Hooks\HookManager.cs" />
+    <Compile Include="Logs\BotoxLogManager.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Protocol\ProtocolManager.cs" />
+    <Compile Include="Proxy\CustomClient.cs" />
+    <Compile Include="Proxy\CustomProxy.cs" />
+    <Compile Include="Proxy\ProxyElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EasyHook, Version=2.7.7097.0, Culture=neutral, PublicKeyToken=4b580fca19d0b0c5, processorArchitecture=MSIL">
@@ -80,5 +92,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BotoxNetwork\BotoxNetwork.csproj">
+      <Project>{FDD35AF2-32B5-4682-8425-C779F4A42E43}</Project>
+      <Name>BotoxNetwork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketHook\SocketHook.csproj">
+      <Project>{EB3FCA74-D359-4356-AFA9-EA23709AE810}</Project>
+      <Name>SocketHook</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
