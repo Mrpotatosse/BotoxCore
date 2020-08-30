@@ -8,4 +8,5 @@ Petite explication du code ( les 3 grand points ) :
   - Le proxy :
 La class CustomProxy est un serveur qui va gérez toute les connections du client Dofus, et la class ProxyElement gère une connection réceptionné par CustomProxy. ( La transition des packets se fait dans ProxyElement à partir des events )
 
+( j'éditerai le readme un peu plus tard )
 
