@@ -1,4 +1,5 @@
-﻿using BotoxNetwork.Server;
+﻿using BotoxDofusProtocol.Protocol;
+using BotoxNetwork.Server;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -44,11 +45,17 @@ namespace BotoxCore.Proxy
         }
 
         public void ConnectRemoteClient(IPEndPoint ip)
-        {
+        {            
+            MessageInformation client_t = new MessageInformation(true);
+            MessageInformation server_t = new MessageInformation(false);
+
             ProxyElement proxy = new ProxyElement()
             {
                 LocalClient = null,
-                RemoteClient = new CustomClient(ip)
+                RemoteClient = new CustomClient(ip),
+
+                ClientTreatment = client_t,
+                ServerTreatment = server_t
             };
 
             Elements.Add(proxy);

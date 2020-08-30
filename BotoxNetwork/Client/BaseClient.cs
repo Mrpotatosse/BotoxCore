@@ -89,7 +89,7 @@ namespace BotoxNetwork.Client
 
         private void _dataSent(IAsyncResult ar)
         {
-            logger.Info($"client {remoteIp} snd data ({dataSndBuffer.Length})");
+            //logger.Info($"client {remoteIp} snd data ({dataSndBuffer.Length})"); // for test
             OnClientSentData?.Invoke(dataSndBuffer);
         }
 
@@ -101,8 +101,7 @@ namespace BotoxNetwork.Client
 
             if (isRunning && errorCode == SocketError.Success && len > 0)
             {
-                logger.Info($"client {remoteIp} rcv data ({len})");
-
+                //logger.Info($"client {remoteIp} rcv data ({len})"); //for test
                 dataRcvBuffer = new MemoryStream();
                 dataRcvBuffer.Write(rcvDataBuffer, 0, len);
 

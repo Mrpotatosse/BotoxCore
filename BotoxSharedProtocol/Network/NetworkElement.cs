@@ -20,6 +20,11 @@ namespace BotoxSharedProtocol.Network
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
 
+        public string BasicString()
+        {
+            return $"{name} ({protocolID})";
+        }
+
         ~NetworkElement()
         {
             fields = null;

@@ -1,5 +1,6 @@
 ﻿using BotoxCore.Hooks;
 using BotoxCore.Logs;
+using BotoxCore.Protocol;
 using BotoxCore.Proxy;
 using NLog;
 using System;
@@ -17,8 +18,10 @@ namespace BotoxCore
         static void Main(string[] args)
         {
             BotoxLogManager.Instance.Init();
-                        
-            logger.Info("Hello World !");
+
+            logger.Info($"Botox Alpha version ({DateTime.Now}) - by MrPot");
+
+            ProtocolManager.Instance.Update();
 
             HookManager.Instance.CreateHooker().Inject();
 

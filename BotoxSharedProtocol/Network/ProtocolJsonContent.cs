@@ -26,7 +26,6 @@ namespace BotoxSharedProtocol.Network
                 {
                     fields.Add(key, null);
                     fields[key] = value;
-                    //fields.Add(key, value); missing microsoft.csharp ='(
                 }
             }
         }

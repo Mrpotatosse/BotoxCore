@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="JsonField\" />
-    <Folder Include="Protocol\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BotoxSharedProtocol\BotoxSharedProtocol.csproj" />
   </ItemGroup>
 

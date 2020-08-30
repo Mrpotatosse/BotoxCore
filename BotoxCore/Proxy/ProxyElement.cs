@@ -1,6 +1,11 @@
-﻿using BotoxNetwork.Client;
+﻿using BotoxCore.Configurations.Customs;
+using BotoxNetwork.Client;
+using BotoxSharedProtocol.Network;
+using BotoxSharedProtocol.Network.Interfaces;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,8 +16,13 @@ namespace BotoxCore.Proxy
 {
     public class ProxyElement
     {
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         public CustomClient LocalClient { get; set; }
         public CustomClient RemoteClient { get; set; }
+
+        public IProtocolTreatment ClientTreatment { get; set; }
+        public IProtocolTreatment ServerTreatment { get; set; }
 
         public void Init()
         {
@@ -22,7 +32,36 @@ namespace BotoxCore.Proxy
             LocalClient.OnClientDisconnected += LocalClient_OnClientDisconnected;
             RemoteClient.OnClientDisconnected += RemoteClient_OnClientDisconnected;
 
+            ClientTreatment.OnMessageParsed += ClientTreatment_OnMessageParsed;
+            ServerTreatment.OnMessageParsed += ServerTreatment_OnMessageParsed;
+
             RemoteClient.Start();
+        }
+
+        private void ServerTreatment_OnMessageParsed(NetworkElement arg1, ProtocolJsonContent arg2)
+        {
+            StartupConfiguration configuration = Configurations.ConfigurationManager.Instance.Startup;
+            if (configuration.show_message)
+            {
+                logger.Info($"[server {RemoteClient.remoteIp}] {arg1.BasicString()}");
+                if (configuration.show_message_content)
+                {
+                    logger.Info($"{arg2}");
+                }
+            }
+        }
+
+        private void ClientTreatment_OnMessageParsed(NetworkElement arg1, ProtocolJsonContent arg2)
+        {
+            StartupConfiguration configuration = Configurations.ConfigurationManager.Instance.Startup;
+            if (configuration.show_message)
+            {
+                logger.Info($"[client {RemoteClient.remoteIp}] {arg1.BasicString()}");
+                if (configuration.show_message_content)
+                {
+                    logger.Info($"{arg2}");
+                }
+            }
         }
 
         private void RemoteClient_OnClientDisconnected(BaseClient obj)
@@ -37,11 +76,13 @@ namespace BotoxCore.Proxy
 
         private void RemoteClient_OnClientReceivedData(MemoryStream obj)
         {
+            ServerTreatment.InitBuild(obj);
             LocalClient.Send(obj.ToArray());
         }
 
         private void LocalClient_OnClientReceivedData(MemoryStream obj)
         {
+            ClientTreatment.InitBuild(obj);
             RemoteClient.Send(obj.ToArray());
         }
     }

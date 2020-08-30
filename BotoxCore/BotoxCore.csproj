@@ -93,9 +93,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BotoxDofusProtocol\BotoxDofusProtocol.csproj">
+      <Project>{241CCF46-3035-4897-B5A0-16D9C0B584E0}</Project>
+      <Name>BotoxDofusProtocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BotoxNetwork\BotoxNetwork.csproj">
       <Project>{FDD35AF2-32B5-4682-8425-C779F4A42E43}</Project>
       <Name>BotoxNetwork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BotoxSharedProtocol\BotoxSharedProtocol.csproj">
+      <Project>{E61D6580-6DB0-45B5-9382-46F2DBA6002E}</Project>
+      <Name>BotoxSharedProtocol</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocketHook\SocketHook.csproj">
       <Project>{EB3FCA74-D359-4356-AFA9-EA23709AE810}</Project>
