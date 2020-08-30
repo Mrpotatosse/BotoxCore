@@ -30,5 +30,7 @@ namespace BotoxSharedProtocol.IO.Interfaces
         string ReadUTF();
 
         bool ReadBoolean();
+
+        void Dispose();
     }
 }

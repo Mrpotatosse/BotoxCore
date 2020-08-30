@@ -1,6 +1,8 @@
 ﻿using BotoxCore.Configurations;
 using BotoxCore.Configurations.Customs;
 using BotoxCore.Extensions;
+using BotoxSharedProtocol.Network;
+using BotoxSharedProtocol.Network.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -11,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace BotoxCore.Hooks
 {
-    public class HookManager : Singleton<HookManager>
+    public class HookManager<T> : Singleton<HookManager<T>> where T : ProtocolTreatment 
     {
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private Dictionary<int, Hooker> Hooks { get; set; } = new Dictionary<int, Hooker>();
+        private Dictionary<int, Hooker<T>> Hooks { get; set; } = new Dictionary<int, Hooker<T>>();
 
-        public Hooker this[Func<Hooker, bool> predicat]
+        public Hooker<T> this[Func<Hooker<T>, bool> predicat]
         {
             get
             {
@@ -25,7 +27,7 @@ namespace BotoxCore.Hooks
             }
         }
 
-        public Hooker this[int port]
+        public Hooker<T> this[int port]
         {
             get
             {
@@ -71,9 +73,9 @@ namespace BotoxCore.Hooks
             }
         }
 
-        public Hooker CreateHooker()
+        public Hooker<T> CreateHooker()
         {
-            Hooker hooker = new Hooker(AvailablePort);
+            Hooker<T> hooker = new Hooker<T>(AvailablePort);
 
             hooker.OnProcessExited += Hooker_OnProcessExited;
             hooker.OnProcessStarted += Hooker_OnProcessStarted;
@@ -83,13 +85,13 @@ namespace BotoxCore.Hooks
             return hooker;
         }
 
-        private void Hooker_OnProcessStarted(Hooker obj)
+        private void Hooker_OnProcessStarted(Hooker<T> obj)
         {
             obj.Proxy.Start();
             // to do
         }
 
-        private void Hooker_OnProcessExited(Hooker obj)
+        private void Hooker_OnProcessExited(Hooker<T> obj)
         {
             obj.Proxy.Stop();
 

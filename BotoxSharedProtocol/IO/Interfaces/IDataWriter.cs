@@ -30,5 +30,7 @@ namespace BotoxSharedProtocol.IO.Interfaces
         void WriteUTF(string @string);
 
         void WriteBoolean(bool @bool);
+
+        void Dispose();
     }
 }

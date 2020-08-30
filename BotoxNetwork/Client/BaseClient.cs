@@ -44,7 +44,7 @@ namespace BotoxNetwork.Client
             }
         }
 
-        private static readonly int RCV_DATA_LENGTH = 8192;
+        private static readonly int RCV_DATA_LENGTH = 4096;
 
         private byte[] rcvDataBuffer { get; set; }
         private MemoryStream dataRcvBuffer { get; set; }
@@ -84,12 +84,12 @@ namespace BotoxNetwork.Client
 
         private void _sendStream()
         {
-            socket.BeginSend(dataSndBuffer.ToArray(), 0, (int)dataSndBuffer.Length, SocketFlags.None, _dataSent, socket);
+            if(isRunning)
+                socket.BeginSend(dataSndBuffer.ToArray(), 0, (int)dataSndBuffer.Length, SocketFlags.None, _dataSent, socket);            
         }
 
         private void _dataSent(IAsyncResult ar)
         {
-            //logger.Info($"client {remoteIp} snd data ({dataSndBuffer.Length})"); // for test
             OnClientSentData?.Invoke(dataSndBuffer);
         }
 
@@ -101,7 +101,6 @@ namespace BotoxNetwork.Client
 
             if (isRunning && errorCode == SocketError.Success && len > 0)
             {
-                //logger.Info($"client {remoteIp} rcv data ({len})"); //for test
                 dataRcvBuffer = new MemoryStream();
                 dataRcvBuffer.Write(rcvDataBuffer, 0, len);
 

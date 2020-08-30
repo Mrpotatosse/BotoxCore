@@ -1,6 +1,8 @@
 ﻿using BotoxCore.Configurations;
 using BotoxCore.Configurations.Customs;
 using BotoxCore.Proxy;
+using BotoxSharedProtocol.Network;
+using BotoxSharedProtocol.Network.Interfaces;
 using EasyHook;
 using NLog;
 using SocketHook;
@@ -14,15 +16,15 @@ using System.Threading.Tasks;
 
 namespace BotoxCore.Hooks
 {
-    public class Hooker
+    public class Hooker<T> where T : ProtocolTreatment
     {
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public int ProxyPort { get; private set; }
-        public CustomProxy Proxy { get; private set; }
+        public CustomProxy<T> Proxy { get; private set; }
 
-        public event Action<Hooker> OnProcessStarted;
-        public event Action<Hooker> OnProcessExited;
+        public event Action<Hooker<T>> OnProcessStarted;
+        public event Action<Hooker<T>> OnProcessExited;
 
         public HookElement _hook;
 
@@ -45,7 +47,7 @@ namespace BotoxCore.Hooks
 
             _hook = new HookElement();
             {
-                _hook.IpcServer = RemoteHooking.IpcCreateServer<BotoxHookInterface>(ref _hook.ChannelName, WellKnownObjectMode.Singleton);
+                _hook.IpcServer = RemoteHooking.IpcCreateServer<BotoxHookInterface<T>>(ref _hook.ChannelName, WellKnownObjectMode.Singleton);
             }
 
             RemoteHooking.CreateAndInject(
@@ -59,7 +61,7 @@ namespace BotoxCore.Hooks
                 _hook.ChannelName,
                 port);
 
-            Proxy = new CustomProxy(ProxyPort, _hook.ProcessId);
+            Proxy = new CustomProxy<T>(ProxyPort, _hook.ProcessId);
 
             Process process = Process.GetProcessById(_hook.ProcessId);
             process.EnableRaisingEvents = true;

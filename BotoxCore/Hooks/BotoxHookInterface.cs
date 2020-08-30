@@ -1,4 +1,5 @@
 ﻿using BotoxCore.Proxy;
+using BotoxSharedProtocol.Network;
 using SocketHook;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace BotoxCore.Hooks
 {
-    public class BotoxHookInterface : HookInterface
+    public class BotoxHookInterface<T> : HookInterface where T : ProtocolTreatment 
     {
         public override void IpRedirected(IPEndPoint ip, int processId, int redirectionPort)
         {
-            HookManager.Instance[redirectionPort].Proxy.ConnectRemoteClient(ip);
+            HookManager<T>.Instance[redirectionPort].Proxy.ConnectRemoteClient(ip);
         }
     }
 }

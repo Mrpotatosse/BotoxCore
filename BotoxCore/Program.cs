@@ -1,7 +1,9 @@
-﻿using BotoxCore.Hooks;
+﻿using BotoxCore.Configurations;
+using BotoxCore.Hooks;
 using BotoxCore.Logs;
 using BotoxCore.Protocol;
 using BotoxCore.Proxy;
+using BotoxDofusProtocol.Protocol;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,16 @@ namespace BotoxCore
 
         static void Main(string[] args)
         {
+            Console.WriteLine(ConfigurationManager.Instance.Startup);
+
             BotoxLogManager.Instance.Init();
 
             logger.Info($"Botox Alpha version ({DateTime.Now}) - by MrPot");
 
             ProtocolManager.Instance.Update();
 
-            HookManager.Instance.CreateHooker().Inject();
+            // change MessageInformation with your own ProtocolTreatment if you want to use it with another game
+            HookManager<MessageInformation>.Instance.CreateHooker().Inject();
 
             Console.ReadLine();
         }

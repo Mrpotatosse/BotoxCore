@@ -1,5 +1,7 @@
 ﻿using BotoxDofusProtocol.Protocol;
 using BotoxNetwork.Server;
+using BotoxSharedProtocol.Network;
+using BotoxSharedProtocol.Network.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BotoxCore.Proxy
 {
-    public class CustomProxy : BaseServer<CustomClient>
+    public class CustomProxy<T> : BaseServer<CustomClient> where T : ProtocolTreatment
     {
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -45,9 +47,9 @@ namespace BotoxCore.Proxy
         }
 
         public void ConnectRemoteClient(IPEndPoint ip)
-        {            
-            MessageInformation client_t = new MessageInformation(true);
-            MessageInformation server_t = new MessageInformation(false);
+        {
+            T client_t = (T)Activator.CreateInstance(typeof(T), new object[] { true });
+            T server_t = (T)Activator.CreateInstance(typeof(T), new object[] { false });
 
             ProxyElement proxy = new ProxyElement()
             {

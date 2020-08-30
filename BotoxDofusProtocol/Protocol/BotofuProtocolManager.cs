@@ -19,11 +19,16 @@ namespace BotoxDofusProtocol.Protocol
                 return File.Exists(PROTOCOL_JSON_LOCATION);
             }
         }
-        public static BotofuProtocol Protocol
+
+        private static BotofuProtocol _protocol { get; set; }
+        public static BotofuProtocol Protocol 
         {
             get
             { 
-                return JsonConvert.DeserializeObject<BotofuProtocol>(File.ReadAllText(PROTOCOL_JSON_LOCATION), new JsonSerializerSettings() { Formatting = Formatting.Indented }); 
+                if(_protocol is null)
+                    _protocol = JsonConvert.DeserializeObject<BotofuProtocol>(File.ReadAllText(PROTOCOL_JSON_LOCATION), new JsonSerializerSettings() { Formatting = Formatting.Indented });
+
+                return _protocol;
             }
         }
 

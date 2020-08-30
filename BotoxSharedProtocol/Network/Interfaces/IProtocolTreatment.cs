@@ -10,8 +10,8 @@ namespace BotoxSharedProtocol.Network.Interfaces
     {
         event Action<NetworkElement, ProtocolJsonContent> OnMessageParsed;
 
-        ProtocolJsonContent FromByte(NetworkElement element, IDataReader reader, ProtocolJsonContent content = null);
-        byte[] FromContent(NetworkElement element, IDataWriter writer, ProtocolJsonContent content);
+        ProtocolJsonContent FromByte(NetworkElement element, ref IDataReader reader, ProtocolJsonContent content = null);
+        byte[] FromContent(NetworkElement element, ref IDataWriter writer, ProtocolJsonContent content);
 
         void InitBuild(MemoryStream stream);
     }
