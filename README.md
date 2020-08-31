@@ -24,6 +24,7 @@ hooker.Inject();
 
 <h2> Configuration </h2>
 La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est créer automatiquement
+
 ```json
 {
   "dofus_location": "D:/DofusApp/Dofus.exe",
