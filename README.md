@@ -10,7 +10,9 @@ La class CustomProxy est un serveur qui va gérez toute les connections d'un cli
 
 <h2> Dependances </h2>
   -NLog (https://nlog-project.org/)
+  
   -NewtonsoftJson (https://www.newtonsoft.com/json)
+  
   -EasyHook (https://easyhook.github.io/)
 
 <h2> Utilisation </h2>
