@@ -51,7 +51,7 @@ namespace BotoxCore.Hooks
             }
 
             RemoteHooking.CreateAndInject(
-                configuration.dofus_location,
+                configuration.game_location,
                 string.Empty,
                 0x00000004,
                 InjectionOptions.DoNotRequireStrongName,
