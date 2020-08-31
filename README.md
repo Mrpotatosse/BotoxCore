@@ -36,5 +36,4 @@ La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est crée
   "show_data": false
 }
 ```
-  
 ( j'éditerai le readme un peu plus tard )
