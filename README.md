@@ -55,6 +55,7 @@ public class ProtocolRequiredHandler : MessageHandler
 
     // le constructeur doit présenter la même forme 
     // il est déconseillé de modifier le constructeur (ajouter d'autres arguments) étant donné que ça produira une erreur 
+    // vous pouvez ajouter des propriété à la class mais ne pourront pas être initialisé à partir d'un argument du constructeur
     public ProtocolRequiredHandler(CustomClient local, CustomClient remote, ProtocolJsonContent content) 
         : base(local, remote, content)
     {
