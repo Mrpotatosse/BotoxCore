@@ -17,7 +17,7 @@ A chaque connection sur le CustomProxy , un faux Client est connecté vers le se
 <h2> Utilisation </h2>
 
 ```csharp
-// T is your ProtocolTreatment class ( for Dofus it's MessageInformation )
+// T est votre class dériveant de ProtocolTreatment ( la class qui gère le traitement du protocol ) dans le cas de Dofus c'est MessageInformation
 // ( https://github.com/Mrpotatosse/BotoxCore/blob/master/BotoxDofusProtocol/Protocol/MessageInformation.cs ) 
 Hooker<T> hooker = HookManager<T>.Instance.CreateHooker();
 hooker.Inject();
@@ -43,30 +43,35 @@ La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est crée
 
 Le handler se fait dans une class qui dérive de MessageHandler (https://github.com/Mrpotatosse/BotoxCore/blob/master/BotoxCore/Handlers/MessageHandler.cs)
 
-Un exemple de class :
+Un exemple de class (https://github.com/Mrpotatosse/BotoxCore/blob/master/BotoxCore/Handlers/Customs/Connection/ProtocolRequiredHandler.cs) :
 
 ```csharp
+// l'attribut est nécessaire au fonctionnement du handler ( si vous ne le mettez pas , la class ne sera pas reconnu comme étant un handler )
 [Handler(ProtocolId = 1)]
 public class ProtocolRequiredHandler : MessageHandler
 {
+    // pour le log
     protected override Logger logger => LogManager.GetCurrentClassLogger();
 
+    // le constructeur doit présenter la même forme 
+    // il est déconseillé de modifier le constructeur (ajouter d'autres arguments) étant donné que ça produira une erreur 
     public ProtocolRequiredHandler(CustomClient local, CustomClient remote, ProtocolJsonContent content) 
         : base(local, remote, content)
     {
     
     }
 
+    // la fonction Handle est obligatoire
     public override void Handle()
     {
         logger.Info("handle protocol required");
     }
-
+    // la fonction EndHandle est optionel
     public override void EndHandle()
     {
         
     }
-
+    // la fonction Error est optionel
     public override void Error(Exception e)
     {
 
