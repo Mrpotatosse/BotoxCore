@@ -1,11 +1,12 @@
 ﻿using BotoxDofusProtocol.IO;
+using BotoxSharedProtocol.IO.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BotoxDofusProtocol.Protocol
 {
-    public class MessageBuffer
+    public class MessageBuffer : IMessageBuffer
     {
         public bool IsValid
         {

@@ -6,6 +6,7 @@ namespace BotoxSharedProtocol.IO.Interfaces
 {
     public interface IDataReader
     {
+        byte[] ReadBytes(int count);
         byte ReadByte();
         sbyte ReadUnsignedByte();// it should be SignedByte but in dofus it is called unsignedbyte ( rmd : byte[0,255] sbyte[-127,127] )
 

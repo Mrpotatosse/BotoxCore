@@ -6,6 +6,7 @@ namespace BotoxSharedProtocol.IO.Interfaces
 {
     public interface IDataWriter
     {
+        void WriteBytes(byte[] bytes);
         void WriteByte(byte @byte);
         void WriteUnsignedByte(sbyte @sbyte);
 

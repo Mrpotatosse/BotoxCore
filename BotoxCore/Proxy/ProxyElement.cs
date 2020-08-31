@@ -1,4 +1,6 @@
 ﻿using BotoxCore.Configurations.Customs;
+using BotoxCore.Hooks;
+using BotoxDofusProtocol.Protocol;
 using BotoxNetwork.Client;
 using BotoxSharedProtocol.Network;
 using BotoxSharedProtocol.Network.Interfaces;
@@ -14,15 +16,15 @@ using System.Threading.Tasks;
 
 namespace BotoxCore.Proxy
 {
-    public class ProxyElement
+    public class ProxyElement<T> where T : ProtocolTreatment
     {
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public CustomClient LocalClient { get; set; }
         public CustomClient RemoteClient { get; set; }
 
-        public IProtocolTreatment ClientTreatment { get; set; }
-        public IProtocolTreatment ServerTreatment { get; set; }
+        public T ClientTreatment { get; set; }
+        public T ServerTreatment { get; set; }
 
         public void Init()
         {
@@ -53,6 +55,19 @@ namespace BotoxCore.Proxy
 
         private void ClientTreatment_OnMessageParsed(NetworkElement arg1, ProtocolJsonContent arg2)
         {
+            var hooker = HookManager<T>.Instance[LocalClient.localIp.Port];
+            if(hooker is null)
+            {
+                logger.Error("no proxy found");
+                return;
+            }
+
+            if (ClientTreatment.Informations is MessageBuffer informations)
+            {
+                hooker.Proxy.LAST_GLOBAL_INSTANCE_ID = informations.InstanceId;
+            }
+
+            uint instance_id = hooker.Proxy.LAST_GLOBAL_INSTANCE_ID + hooker.Proxy.FAKE_MESSAGE_SENT;
             StartupConfiguration configuration = Configurations.ConfigurationManager.Instance.Startup;
             if (configuration.show_message)
             {
@@ -62,6 +77,8 @@ namespace BotoxCore.Proxy
                     logger.Info($"{arg2}");
                 }
             }
+
+            RemoteClient.Send(ClientTreatment.Informations.ReWriteInstanceId(instance_id));
         }
 
         private void RemoteClient_OnClientDisconnected(BaseClient obj)
@@ -83,7 +100,7 @@ namespace BotoxCore.Proxy
         private void LocalClient_OnClientReceivedData(MemoryStream obj)
         {
             ClientTreatment.InitBuild(obj);
-            RemoteClient.Send(obj.ToArray());
+            //RemoteClient.Send(obj.ToArray());
         }
     }
 }

@@ -1,21 +1,24 @@
 ﻿using BotoxDofusProtocol.IO;
 using BotoxSharedProtocol.IO.Interfaces;
 using BotoxSharedProtocol.Network;
+using BotoxSharedProtocol.Network.Fields;
 using BotoxSharedProtocol.Network.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
+using NLog;
 
 namespace BotoxDofusProtocol.Protocol
 {
     public class MessageInformation : ProtocolTreatment
     {
-        public override event Action<NetworkElement, ProtocolJsonContent> OnMessageParsed;
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public MessageBuffer Informations { get; set; }
-        
+        public override event Action<NetworkElement, ProtocolJsonContent> OnMessageParsed;
+                
         private BigEndianReader Reader { get; set; }
 
         public MessageInformation(bool clientSide) : base(clientSide)
@@ -26,14 +29,15 @@ namespace BotoxDofusProtocol.Protocol
 
         public override void InitBuild(MemoryStream stream)
         {
+            MessageBuffer informations = Informations as MessageBuffer;
             if (stream.Length > 0) Reader.Add(stream.ToArray(), 0, (int)stream.Length);
 
-            if(Informations.Build(Reader, ClientSide))
+            if(informations.Build(Reader, ClientSide))
             {
-                if (BotofuProtocolManager.Protocol[ProtocolKeyEnum.Messages, x => x.protocolID == Informations.MessageId] is NetworkElement message)
+                if (BotofuProtocolManager.Protocol[ProtocolKeyEnum.Messages, x => x.protocolID == informations.MessageId] is NetworkElement message)
                 {
-                    IDataReader reader = new BigEndianReader(Informations.Data);
-                    ProtocolJsonContent content = FromByte(message, ref reader);
+                    IDataReader reader = new BigEndianReader(informations.Data);
+                    ProtocolJsonContent content = FromByte(null, message, reader);
                     reader.Dispose();
                     OnMessageParsed?.Invoke(message, content);
                 }
@@ -50,25 +54,6 @@ namespace BotoxDofusProtocol.Protocol
 
                 InitBuild(stream);                
             }
-
-        }
-
-        private async Task ParseMessageAsync(NetworkElement message, ProtocolJsonContent content)
-        {
-            await Task.Run(() =>
-            {
-                OnMessageParsed?.Invoke(message, content);
-            });
-        }
-
-        public override ProtocolJsonContent FromByte(NetworkElement element, ref IDataReader reader, ProtocolJsonContent content = null)
-        {
-            return new ProtocolJsonContent();
-        }
-
-        public override byte[] FromContent(NetworkElement element, ref IDataWriter writer, ProtocolJsonContent content)
-        {
-            return new byte[0];
         }
     }
 }

@@ -127,6 +127,11 @@ namespace BotoxDofusProtocol.IO
             WriteVarInt(unchecked((int)@uint));
         }
 
+        public void WriteVarShort(int @short)
+        {
+            WriteVarShort((short)@short);
+        }
+
         public void WriteVarShort(short @short)
         {
             var value = unchecked((ushort)@short);
@@ -147,6 +152,11 @@ namespace BotoxDofusProtocol.IO
                     b |= MASK_10000000;
                 m_writer.Write(b);
             }
+        }
+
+        public void WriteVarUhShort(int @ushort)
+        {
+            WriteVarUhShort((ushort)@ushort);
         }
 
         public void WriteVarUhShort(ushort @ushort)
@@ -202,6 +212,11 @@ namespace BotoxDofusProtocol.IO
             WriteBigEndianBytes(BitConverter.GetBytes(@short));
         }
 
+        public void WriteShort(int @short)
+        {
+            WriteShort((short)@short);
+        }
+
         /// <summary>
         ///   Write a int into the buffer
         /// </summary>
@@ -238,6 +253,11 @@ namespace BotoxDofusProtocol.IO
             WriteBigEndianBytes(BitConverter.GetBytes(@ushort));
         }
 
+        public void WriteUnsignedShort(int @ushort)
+        {
+            WriteUnsignedShort((ushort)@ushort);
+        }
+
         /// <summary>
         ///   Write a int into the buffer
         /// </summary>
@@ -265,9 +285,19 @@ namespace BotoxDofusProtocol.IO
             m_writer.Write(@byte);
         }
 
-        public void WriteUnsignedByte(sbyte @byte)
+        public void WriteByte(int @byte)
         {
-            m_writer.Write(@byte);
+            WriteByte((byte)@byte);
+        }
+
+        public void WriteUnsignedByte(sbyte @sbyte)
+        {
+            m_writer.Write(@sbyte);
+        }
+
+        public void WriteUnsignedByte(int @sbyte)
+        {
+            WriteUnsignedByte((sbyte)@sbyte);
         }
         /// <summary>
         ///   Write a Float into the buffer
