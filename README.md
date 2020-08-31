@@ -40,7 +40,8 @@ La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est crée
 
 <h2> Handler </h2>
 
-Le handler se fait dans une class qui dérive de MessageHandler 
+Le handler se fait dans une class qui dérive de MessageHandler
+
 Un exemple de class :
 
 ```csharp
