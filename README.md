@@ -16,7 +16,7 @@ La class CustomProxy est un serveur qui va gérez toute les connections d'un cli
 <h2> Utilisation </h2>
 
 ```csharp
-// T is your ProtocolTreatment class ( for Dofus it's BotoxMessageInformation )
+// T is your ProtocolTreatment class ( for Dofus it's MessageInformation )
 // ( https://github.com/Mrpotatosse/BotoxCore/blob/master/BotoxDofusProtocol/Protocol/MessageInformation.cs ) 
 Hooker<T> hooker = HookManager<T>.Instance.CreateHooker();
 hooker.Inject();
