@@ -37,4 +37,39 @@ La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est crée
   "show_data": false
 }
 ```
+
+<h2> Handler </h2>
+
+Le handler se fait dans une class qui dérive de MessageHandler 
+Un exemple de class :
+
+```csharp
+[Handler(ProtocolId = 1)]
+public class ProtocolRequiredHandler : MessageHandler
+{
+    protected override Logger logger => LogManager.GetCurrentClassLogger();
+
+    public ProtocolRequiredHandler(CustomClient local, CustomClient remote, ProtocolJsonContent content) 
+        : base(local, remote, content)
+    {
+    
+    }
+
+    public override void Handle()
+    {
+        logger.Info("handle protocol required");
+    }
+
+    public override void EndHandle()
+    {
+        
+    }
+
+    public override void Error(Exception e)
+    {
+
+    }
+}
+```
+
 ( j'éditerai le readme un peu plus tard )
