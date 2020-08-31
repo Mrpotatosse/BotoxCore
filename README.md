@@ -32,10 +32,12 @@ La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est crée
   "dll_location": "./SocketHook.dll",
   "default_proxy_port": 666,
   "show_log": true,
-  "save_log": true,
+  "save_log": false,
   "show_message": true,
-  "show_message_content": true,
-  "show_data": false
+  "show_message_content": false,
+  "show_data": false,
+  "show_fake_message": true,
+  "show_fake_message_content": false
 }
 ```
 
