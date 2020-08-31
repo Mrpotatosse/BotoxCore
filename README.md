@@ -28,7 +28,7 @@ La configuration '/.startup.json' ( dans le dossier bin/éxécutable ) est crée
 
 ```json
 {
-  "dofus_location": "D:/DofusApp/Dofus.exe",
+  "game_location": "D:/DofusApp/Dofus.exe",
   "dll_location": "./SocketHook.dll",
   "default_proxy_port": 666,
   "show_log": true,
