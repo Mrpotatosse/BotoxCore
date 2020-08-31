@@ -9,11 +9,9 @@ Petite explication du code ( les 3 grand points ) :
 La class CustomProxy est un serveur qui va gérez toute les connections d'un client Local ( dans notre cas c'est Dofus mais c'est pas spécifique à Dofus ), et la class ProxyElement gère une connection réceptionné par CustomProxy. ( La transition des packets se fait dans ProxyElement à partir des events )
 
 <h2> Dependances </h2>
-  -NLog (https://nlog-project.org/)
-  
-  -NewtonsoftJson (https://www.newtonsoft.com/json)
-  
-  -EasyHook (https://easyhook.github.io/)
+  -NLog (https://nlog-project.org/)</br>  
+  -NewtonsoftJson (https://www.newtonsoft.com/json)</br>  
+  -EasyHook (https://easyhook.github.io/)</br>
 
 <h2> Utilisation </h2>
 
