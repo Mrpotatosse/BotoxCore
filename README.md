@@ -7,7 +7,7 @@ Petite explication du code ( les 3 grand points ) :
   - Le protocol Dofus à était pris depuis ce lien : https://cldine.gitlab.io/-/protocol-autoparser/-/jobs/691246963/artifacts/protocol.json
   - Le proxy :
 La class CustomProxy est un serveur qui va gérez toute les connections d'un client Local ( dans notre cas c'est Dofus mais c'est pas spécifique à Dofus ), et la class ProxyElement gère une connection réceptionné par CustomProxy. ( La transition des packets se fait dans ProxyElement à partir des events ) 
-A chaque connection sur le CustomProxy , un faux Client est connecté vers le serveur original ( récupérer via depuis la fonction IpRedirected() )
+A chaque connection sur le CustomProxy , un faux Client est connecté vers le serveur original ( récupérer via la fonction IpRedirected() )
 
 <h2> Dependances </h2>
   -NLog (https://nlog-project.org/)</br>  
