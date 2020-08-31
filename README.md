@@ -1,6 +1,6 @@
 <h2> # BotoxCore </h2>
 
-Spécialement crée pour Dofus , mais il peut être utilisé sur beaucoup d'autre jeu ( il vous suffira d'implémenter le protocol spécifique à ce jeu )
+Spécialement crée pour Dofus , mais il peut être utilisé sur beaucoup d'autre jeu ( il vous suffira d'implémenter le protocol spécifique à ce jeu ) ( si vous n'avez pas encore trouver une implémentation du protocol , vous pouvez vous en servir pour afficher les données qui transite )
 
 Petite explication du code ( les 3 grand points ) :
   - Utilisation du SocketHook (https://cadernis.fr/index.php?threads/sockethook-injector-alternative-%C3%A0-no-ankama-dll.2221/page-2#post-24796) pour rediriger le client , que j'ai un peu modifié. ( Retrait de la condition de redirection d'IP, ducoup ça redirige toute les IP , puis ajout de la fonction IpRedirected() , qui sera appellé à chaque redirection de connection )
