@@ -1,4 +1,5 @@
 ﻿using BotoxCore.Configurations;
+using BotoxCore.Handlers;
 using BotoxCore.Hooks;
 using BotoxCore.Logs;
 using BotoxCore.Protocol;
@@ -19,13 +20,12 @@ namespace BotoxCore
 
         static void Main(string[] args)
         {
-            Console.WriteLine(ConfigurationManager.Instance.Startup);
-
             BotoxLogManager.Instance.Init();
 
             logger.Info($"Botox Alpha version ({DateTime.Now}) - by MrPot");
 
             ProtocolManager.Instance.Update();
+            HandlerManager.Instance.Init();
 
             // change MessageInformation with your own ProtocolTreatment if you want to use it with another game
             HookManager<MessageInformation>.Instance.CreateHooker().Inject();

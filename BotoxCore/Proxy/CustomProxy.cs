@@ -68,16 +68,30 @@ namespace BotoxCore.Proxy
             client_t.OnMessageParsed += Client_t_OnMessageParsed;
             server_t.OnMessageParsed += Server_t_OnMessageParsed;
 
+            CustomClient remoteClient = new CustomClient(ip);
+            remoteClient.GetCustomInstanceId += RemoteClient_GetCustomInstanceId;
+            remoteClient.OnCustomMessageSent += RemoteClient_OnCustomMessageSent;
+
             ProxyElement<T> proxy = new ProxyElement<T>()
             {
                 LocalClient = null,
-                RemoteClient = new CustomClient(ip),
+                RemoteClient = remoteClient,
 
                 ClientTreatment = client_t,
                 ServerTreatment = server_t
             };
 
             Elements.Add(proxy);
+        }
+
+        private void RemoteClient_OnCustomMessageSent(NetworkElement arg1, ProtocolJsonContent arg2)
+        {
+            FAKE_MESSAGE_SENT++;
+        }
+
+        private uint RemoteClient_GetCustomInstanceId()
+        {
+            return FAKE_MSG_INSTANCE_ID + 1;
         }
 
         private void Server_t_OnMessageParsed(NetworkElement arg1, ProtocolJsonContent arg2)

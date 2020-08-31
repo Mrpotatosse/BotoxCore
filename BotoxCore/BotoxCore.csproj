@@ -42,6 +42,13 @@
     <Compile Include="Configurations\IConfiguration.cs" />
     <Compile Include="Extensions\ProtocolTreatmentExtension.cs" />
     <Compile Include="Extensions\Singleton.cs" />
+    <Compile Include="Extensions\ActionExtension.cs" />
+    <Compile Include="Handlers\Customs\Connection\ProtocolRequiredHandler.cs" />
+    <Compile Include="Handlers\Customs\Map\MapComplementaryInformationsDataMessageHandler.cs" />
+    <Compile Include="Handlers\HandlerAttribute.cs" />
+    <Compile Include="Handlers\HandlerManager.cs" />
+    <Compile Include="Handlers\Interfaces\IMessageHandler.cs" />
+    <Compile Include="Handlers\MessageHandler.cs" />
     <Compile Include="Hooks\BotoxHookInterface.cs" />
     <Compile Include="Hooks\Hooker.cs" />
     <Compile Include="Hooks\HookManager.cs" />

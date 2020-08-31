@@ -1,4 +1,5 @@
 ﻿using BotoxCore.Configurations.Customs;
+using BotoxCore.Handlers;
 using BotoxCore.Hooks;
 using BotoxDofusProtocol.Protocol;
 using BotoxNetwork.Client;
@@ -51,6 +52,8 @@ namespace BotoxCore.Proxy
                     logger.Info($"{arg2}");
                 }
             }
+
+            HandlerManager.Instance.Handle(arg1.protocolID, LocalClient, RemoteClient, arg2);
         }
 
         private void ClientTreatment_OnMessageParsed(NetworkElement arg1, ProtocolJsonContent arg2)
@@ -61,7 +64,7 @@ namespace BotoxCore.Proxy
                 logger.Error("no proxy found");
                 return;
             }
-
+            
             if (ClientTreatment.Informations is MessageBuffer informations)
             {
                 hooker.Proxy.LAST_GLOBAL_INSTANCE_ID = informations.InstanceId;
@@ -78,6 +81,7 @@ namespace BotoxCore.Proxy
                 }
             }
 
+            HandlerManager.Instance.Handle(arg1.protocolID, LocalClient, RemoteClient, arg2);
             RemoteClient.Send(ClientTreatment.Informations.ReWriteInstanceId(instance_id));
         }
 
@@ -100,7 +104,6 @@ namespace BotoxCore.Proxy
         private void LocalClient_OnClientReceivedData(MemoryStream obj)
         {
             ClientTreatment.InitBuild(obj);
-            //RemoteClient.Send(obj.ToArray());
         }
     }
 }
