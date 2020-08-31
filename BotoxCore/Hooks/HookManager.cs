@@ -1,4 +1,5 @@
-﻿using BotoxCore.Configurations;
+﻿using BotoxCore.AutoLogin;
+using BotoxCore.Configurations;
 using BotoxCore.Configurations.Customs;
 using BotoxCore.Extensions;
 using BotoxSharedProtocol.Network;
@@ -6,6 +7,7 @@ using BotoxSharedProtocol.Network.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -87,8 +89,10 @@ namespace BotoxCore.Hooks
 
         private void Hooker_OnProcessStarted(Hooker<T> obj)
         {
+            Process process = Process.GetProcessById(obj.Proxy.ProcessId);
             obj.Proxy.Start();
             // to do
+            logger.Info($"handle found : {process.Handle}");
         }
 
         private void Hooker_OnProcessExited(Hooker<T> obj)

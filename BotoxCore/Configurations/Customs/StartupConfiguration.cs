@@ -11,7 +11,7 @@ namespace BotoxCore.Configurations.Customs
     {
         public string LOCATION => "./startup.json";
 
-        public string dofus_location { get; set; }
+        public string game_location { get; set; }
         public string dll_location { get; set; }
 
         public int default_proxy_port { get; set; }
@@ -29,7 +29,7 @@ namespace BotoxCore.Configurations.Customs
 
         public StartupConfiguration()
         {
-            dofus_location = "D:/DofusApp/Dofus.exe";
+            game_location = "D:/DofusApp/Dofus.exe";
             dll_location = "./SocketHook.dll";
 
             default_proxy_port = 666;
