@@ -40,6 +40,7 @@
     <Compile Include="Configurations\ConfigurationManager.cs" />
     <Compile Include="Configurations\Customs\StartupConfiguration.cs" />
     <Compile Include="Configurations\IConfiguration.cs" />
+    <Compile Include="Extensions\ByteArrayExtension.cs" />
     <Compile Include="Extensions\ProtocolTreatmentExtension.cs" />
     <Compile Include="Extensions\Singleton.cs" />
     <Compile Include="Extensions\ActionExtension.cs" />

@@ -1,4 +1,6 @@
-﻿using BotoxCore.Configurations.Customs;
+﻿using BotoxCore.Configurations;
+using BotoxCore.Configurations.Customs;
+using BotoxCore.Extensions;
 using BotoxCore.Handlers;
 using BotoxCore.Hooks;
 using BotoxDofusProtocol.Protocol;
@@ -97,12 +99,26 @@ namespace BotoxCore.Proxy
 
         private void RemoteClient_OnClientReceivedData(MemoryStream obj)
         {
+            if (Configurations.ConfigurationManager.Instance.Startup.show_data)
+            {
+                logger.Info($"- - - server [len : {obj.Length}]- - -");
+                logger.Info(obj.ToArray().ToHexString());
+                Console.WriteLine();
+            }
+
             ServerTreatment.InitBuild(obj);
             LocalClient.Send(obj.ToArray());
         }
 
         private void LocalClient_OnClientReceivedData(MemoryStream obj)
         {
+            if (Configurations.ConfigurationManager.Instance.Startup.show_data)
+            {
+                logger.Info($"- - - client [len : {obj.Length}]- - -");
+                logger.Info(obj.ToArray().ToHexString());
+                Console.WriteLine();
+            }
+
             ClientTreatment.InitBuild(obj);
         }
     }
