@@ -47,6 +47,8 @@ namespace SocketHook
 
         private int _onConnect(IntPtr socket, IntPtr address, int addrSize)
         {
+            _interface.Message($"s:{socket} a:{address} si:{addrSize}");
+
             var structure = Marshal.PtrToStructure<sockaddr_in>(address);
             var ipAddress = new IPAddress(structure.sin_addr.S_addr);
             var port = structure.sin_port;

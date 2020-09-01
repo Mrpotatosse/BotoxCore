@@ -92,7 +92,6 @@ namespace BotoxCore.Hooks
             Process process = Process.GetProcessById(obj.Proxy.ProcessId);
             obj.Proxy.Start();
             // to do
-            logger.Info($"handle found : {process.Handle}");
         }
 
         private void Hooker_OnProcessExited(Hooker<T> obj)

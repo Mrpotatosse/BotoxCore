@@ -19,6 +19,8 @@ namespace BotoxCore.Logs
 
         public void Init()
         {
+            Console.Title = "BotoxCore - Alpha";
+
             if(ConfigurationManager.Instance.Startup.show_log)
                 configuration.AddRule(LogLevel.Info, LogLevel.Fatal, log_console);
             

@@ -5,6 +5,7 @@ using BotoxCore.Hooks;
 using BotoxCore.Logs;
 using BotoxCore.Protocol;
 using BotoxCore.Proxy;
+using BotoxCore.UI;
 using BotoxDofusProtocol.Protocol;
 using NLog;
 using System;
@@ -27,8 +28,10 @@ namespace BotoxCore
 
             ProtocolManager.Instance.Update();
             HandlerManager.Instance.Init();
-
-            HookManager<MessageInformation>.Instance.CreateHooker().Inject();
+            if (!UIManager.Instance.Init())
+            {
+                HookManager<MessageInformation>.Instance.CreateHooker().Inject();
+            }
 
             Console.ReadLine();
         }

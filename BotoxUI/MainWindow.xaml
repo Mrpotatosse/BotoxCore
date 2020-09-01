@@ -1,0 +1,22 @@
+﻿<Window x:Class="BotoxUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BotoxUI" xmlns:button="clr-namespace:BotoxUI.Views.Button" xmlns:container="clr-namespace:BotoxUI.Views.Container"
+        mc:Ignorable="d"
+        Title="BotoxUI" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+            <button:CustomButton x:Name="LaunchButton" Height="50" IsSelected="False" SelectionColor="#34C011" BackgroundColor="#464945" DockPanel.Dock="Top" ButtonText="Dofus"/>
+            <DockPanel>
+                <container:CustomContainer ContentHeight="50" x:Name="MainContainer"></container:CustomContainer>
+            </DockPanel>
+        </DockPanel>
+        <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Margin="2" x:Name="MainFrame"></Frame>
+    </Grid>
+</Window>

@@ -44,9 +44,11 @@
     <Compile Include="Configurations\Customs\StartupConfiguration.cs" />
     <Compile Include="Configurations\IConfiguration.cs" />
     <Compile Include="Extensions\ByteArrayExtension.cs" />
+    <Compile Include="Extensions\ProtocolJsonContentExtension.cs" />
     <Compile Include="Extensions\ProtocolTreatmentExtension.cs" />
     <Compile Include="Extensions\Singleton.cs" />
     <Compile Include="Extensions\ActionExtension.cs" />
+    <Compile Include="Handlers\Customs\Connection\CharacterSelectedSuccessMessage.cs" />
     <Compile Include="Handlers\Customs\Connection\ProtocolRequiredHandler.cs" />
     <Compile Include="Handlers\Customs\Map\MapComplementaryInformationsDataMessageHandler.cs" />
     <Compile Include="Handlers\HandlerAttribute.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Proxy\CustomClient.cs" />
     <Compile Include="Proxy\CustomProxy.cs" />
     <Compile Include="Proxy\ProxyElement.cs" />
+    <Compile Include="UI\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EasyHook, Version=2.7.7097.0, Culture=neutral, PublicKeyToken=4b580fca19d0b0c5, processorArchitecture=MSIL">
@@ -74,6 +77,8 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.4\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -83,7 +88,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="EasyHook32.dll">
@@ -114,9 +121,17 @@
       <Project>{FDD35AF2-32B5-4682-8425-C779F4A42E43}</Project>
       <Name>BotoxNetwork</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BotoxSharedModel\BotoxSharedModel.csproj">
+      <Project>{C491DC87-E1A9-4504-B26A-84C0EAE42BA1}</Project>
+      <Name>BotoxSharedModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BotoxSharedProtocol\BotoxSharedProtocol.csproj">
       <Project>{E61D6580-6DB0-45B5-9382-46F2DBA6002E}</Project>
       <Name>BotoxSharedProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BotoxUI\BotoxUI.csproj">
+      <Project>{8210D500-40CB-4C72-B4C2-E37FBE349628}</Project>
+      <Name>BotoxUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocketHook\SocketHook.csproj">
       <Project>{EB3FCA74-D359-4356-AFA9-EA23709AE810}</Project>

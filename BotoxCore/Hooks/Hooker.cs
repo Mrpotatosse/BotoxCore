@@ -1,6 +1,7 @@
 ﻿using BotoxCore.Configurations;
 using BotoxCore.Configurations.Customs;
 using BotoxCore.Proxy;
+using BotoxSharedModel.Models.Actors;
 using BotoxSharedProtocol.Network;
 using BotoxSharedProtocol.Network.Interfaces;
 using EasyHook;
@@ -19,6 +20,8 @@ namespace BotoxCore.Hooks
     public class Hooker<T> where T : ProtocolTreatment
     {
         static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        public PlayerModel Player { get; set; }
 
         public int ProxyPort { get; private set; }
         public CustomProxy<T> Proxy { get; private set; }

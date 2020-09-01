@@ -27,6 +27,8 @@ namespace BotoxCore.Configurations.Customs
         public bool show_fake_message { get; set; }
         public bool show_fake_message_content { get; set; }
 
+        public bool show_ui { get; set; }
+
         public StartupConfiguration()
         {
             game_location = "D:/DofusApp/Dofus.exe";
@@ -44,6 +46,8 @@ namespace BotoxCore.Configurations.Customs
 
             show_fake_message = true;
             show_fake_message_content = false;
+
+            show_ui = false;
         }
 
         public override string ToString()
