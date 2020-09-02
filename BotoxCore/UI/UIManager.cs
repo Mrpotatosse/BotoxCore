@@ -76,14 +76,14 @@ namespace BotoxCore.UI
             UI.Launch.OnClick += UI_OnLaunchRequested;
         }
 
-        private void UI_OnLaunchRequested(CustomButton btn)
+        private async void UI_OnLaunchRequested(CustomButton btn)
         {
             Hooker<MessageInformation> hooker = HookManager<MessageInformation>.Instance.CreateHooker();
 
             hooker.OnProcessStarted += Hooker_OnProcessStarted;
             hooker.OnProcessExited += Hooker_OnProcessExited;
 
-            hooker.Inject();
+            await btn.Dispatcher.BeginInvoke(new ExecuteActionUI(hooker.Inject));
         }
 
         private void Hooker_OnProcessExited(Hooker<MessageInformation> obj)

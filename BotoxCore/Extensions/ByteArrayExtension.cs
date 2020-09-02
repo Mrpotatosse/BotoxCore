@@ -8,9 +8,9 @@ namespace BotoxCore.Extensions
 {
     public static class ByteArrayExtension
     {
-        public static string ToHexString(this byte[] byteArray)
+        public static string ToHexString(this byte[] byteArray, bool space = true)
         {
-            return BitConverter.ToString(byteArray).Replace("-", " ");
+            return BitConverter.ToString(byteArray).Replace("-", space ? " " : "");
         }
     }
 }

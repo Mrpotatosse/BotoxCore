@@ -45,6 +45,7 @@
     <Compile Include="Configurations\IConfiguration.cs" />
     <Compile Include="Extensions\ByteArrayExtension.cs" />
     <Compile Include="Extensions\ClientExtension.cs" />
+    <Compile Include="Extensions\EntityLookExtension.cs" />
     <Compile Include="Extensions\ProtocolJsonContentExtension.cs" />
     <Compile Include="Extensions\ProtocolTreatmentExtension.cs" />
     <Compile Include="Extensions\Singleton.cs" />

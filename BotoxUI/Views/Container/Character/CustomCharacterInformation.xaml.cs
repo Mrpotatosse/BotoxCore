@@ -1,6 +1,8 @@
 ﻿using BotoxSharedModel.Models.Actors;
+using BotoxUI.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +28,42 @@ namespace BotoxUI.Views.Container.Character
             InitializeComponent();
         }
 
-        public void FromModel(PlayerModel model)
+        public void FromModel(PlayerModel model, Bitmap image)
         {
+            Level = model.Level;
+            CharName = model.Name;
 
+            CharacterImageBox.Source = image?.Source();
         }
+
+        private int _level { get; set; } = 0;
+        private int Level 
+        {
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+                NameLvTxt.Text = NameLvStr;
+            } 
+        }
+
+        private string _name { get; set; } = "";
+        private string CharName
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                NameLvTxt.Text = NameLvStr;
+            }
+        } 
+
+        private string NameLvStr => $"{CharName} Lv.{Level}";
     }
 }

@@ -9,5 +9,7 @@ namespace BotoxSharedModel.Models.Actors
         public string Name { get; set; }
         public short Level { get; set; }
         public bool IsMerchant { get; set; }
+        public byte BreedId { get; set; }
+        public bool Sex { get; set; }
     }
 }

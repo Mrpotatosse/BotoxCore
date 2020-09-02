@@ -15,8 +15,8 @@ namespace BotoxNetwork.Client
         public Socket socket { get; private set; }
         public IPEndPoint ipResolve { get; private set; }
 
-        public IPEndPoint remoteIp => socket.RemoteEndPoint as IPEndPoint;
-        public IPEndPoint localIp => socket.LocalEndPoint as IPEndPoint;
+        public IPEndPoint remoteIp => isRunning ? socket.RemoteEndPoint as IPEndPoint : null;
+        public IPEndPoint localIp => isRunning ? socket.LocalEndPoint as IPEndPoint : null;
 
         public bool isRunning
         {

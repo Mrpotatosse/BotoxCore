@@ -4,16 +4,21 @@ using BotoxDofusProtocol.Protocol;
 using BotoxSharedProtocol.IO.Interfaces;
 using BotoxSharedProtocol.Network;
 using BotoxSharedProtocol.Network.Fields;
+using NLog;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 
 namespace BotoxCore.Extensions
 {
     public static class ProtocolTreatmentExtension
     {
+        static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
         public static byte[] FromContent(ProtocolJsonContent content, NetworkElement field)
         {
             if (content is null) return new byte[0];
@@ -53,7 +58,7 @@ namespace BotoxCore.Extensions
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{e}");
+                logger.Error(e);
                 return new byte[0];
             }
         }
@@ -65,6 +70,11 @@ namespace BotoxCore.Extensions
                 if (!field.constant_length.HasValue)
                 {
                     string write_len_method = field.write_length_method.Replace("write", "Write");
+                    if(value is null)
+                    {
+                        _writeMethod(write_len_method, 0, ref writer);
+                        return;
+                    }
                     _writeMethod(write_len_method, value.Length, ref writer);
                 }
 
@@ -85,9 +95,13 @@ namespace BotoxCore.Extensions
             {
                 typeof(BigEndianWriter).GetMethod(write_method).Invoke(writer, new object[] { value });
             }
-            catch
+            catch(AmbiguousMatchException)
             {
-                // to do
+                typeof(BigEndianWriter).GetMethods().FirstOrDefault(x => x.Name == write_method && x.GetParameters().FirstOrDefault(p => p.ParameterType == typeof(int)) != null).Invoke(writer, new object[] { value });
+            }
+            catch(Exception e)
+            {
+                logger.Error(e);
             }
         }
 

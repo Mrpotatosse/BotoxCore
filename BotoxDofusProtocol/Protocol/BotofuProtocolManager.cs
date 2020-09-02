@@ -32,14 +32,19 @@ namespace BotoxDofusProtocol.Protocol
             }
         }
 
+        private static readonly object _lock = new object();
+
         public static bool Download()
         {
-            using(WebClient client = new WebClient())
+            lock (_lock)
             {
-                client.DownloadFile(PROTOCOL_URL, PROTOCOL_JSON_LOCATION);
-            }
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(PROTOCOL_URL, PROTOCOL_JSON_LOCATION);
+                }
 
-            return FoundProtocol;
+                return FoundProtocol;
+            }
         }
     }
 }
